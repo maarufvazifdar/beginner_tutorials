@@ -25,8 +25,8 @@
  * @author Maaruf Vazifdar
  * @brief This file demonstrates simple sending of messages over the ROS
  * system and also starts a service to return a string message.
- * @version 1.0
- * @date 10/30/2021
+ * @version 1.2
+ * @date 11/07/2021
  * @copyright  Copyright (c) 2021
  * 
  */
@@ -34,7 +34,6 @@
 #include <ros/ros.h>
 #include <std_msgs/String.h>
 #include <sstream>
-#include <cstdlib>
 #include "beginner_tutorials/my_service.h"
 
 int default_freq = 5;
