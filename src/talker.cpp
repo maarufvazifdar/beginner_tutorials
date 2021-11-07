@@ -49,8 +49,8 @@ bool change_string(beginner_tutorials::my_service::Request  &req,
          beginner_tutorials::my_service::Response &res) {
   res.output = req.input;
   base_string = req.input;
-  ROS_INFO_STREAM("requesting: x=" << req.input);
-  ROS_INFO_STREAM("sending back string: " << res.output);
+  ROS_INFO_STREAM("Requesting: x=" << req.input);
+  ROS_INFO_STREAM("Sending back string: " << res.output);
   return true;
 }
 
@@ -94,7 +94,7 @@ int main(int argc, char **argv) {
   ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 10);
 
   ros::ServiceServer service = n.advertiseService("my_service", change_string);
-  ROS_INFO_STREAM("my_service is ready.");
+  ROS_INFO_STREAM("my_service is ready!");
 
   // set talker node frequency to default value
   int talker_freq = default_freq;
