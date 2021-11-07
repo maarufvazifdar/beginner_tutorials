@@ -4,7 +4,7 @@
 ### **Author:** *Maaruf Vazifdar*, maarufvazifdar@gmail.com
 
 ## Overview
-The ROS Pub Sub assignment demonstrates the working of a simple publisher subscriber and nodes communicating over the *chatter* topic and a starts a service to change the base_string in talker.
+The ROS assignment demonstrates the working of a simple publisher subscriber and nodes communicating over the *chatter* topic and a starts a service to change the base_string in talker.
 
 - **Talker** node continuously publishes a string message on the *chatter* topic at a rate (in Hz) according to the argument given when launching.
 - **Listener** node subscribes to the *chatter* topic and prints the ROS_INFO message on the terminal.
