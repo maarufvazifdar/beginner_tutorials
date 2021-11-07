@@ -139,6 +139,7 @@ int main(int argc, char **argv) {
     msg.data = ss.str();
 
     ROS_INFO_STREAM(msg.data.c_str());
+    ROS_DEBUG_STREAM(msg.data.c_str());
     /**
      * The publish() function is how you send messages. The parameter
      * is the message object. The type of this object must agree with the type
