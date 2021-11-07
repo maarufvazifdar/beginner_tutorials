@@ -4,38 +4,47 @@
 ### **Author:** *Maaruf Vazifdar*, maarufvazifdar@gmail.com
 
 ## Overview
-The ROS Pub Sub assignment demonstrates the working of a simple publisher subscriber and nodes communicating over the *chatter* topic.
+The ROS Pub Sub assignment demonstrates the working of a simple publisher subscriber and nodes communicating over the *chatter* topic and a starts a service to change the base_string in talker.
 
-- **Talker** node continuously publishes a string message on the *chatter* topic at a rate of 10 Hz.
+- **Talker** node continuously publishes a string message on the *chatter* topic at a rate (in Hz) according to the argument given when launching.
 - **Listener** node subscribes to the *chatter* topic and prints the ROS_INFO message on the terminal.
 
 ## Dependencies
 - ROS - Melodic
 
-## Building and Running the package
-1) Build the package and start roscore:
+## Building and Running
+1) Build the package and launch talker and listener nodes:
     ```bash
     cd ~/<your_ws>/src
     git clone https://github.com/maarufvazifdar/beginner_tutorials.git
     cd ~/<your_ws>
     catkin_make
-    roscore
+    roslaunch beginner_tutorials beginner_tutorials.launch talker_frequency:=20
     ```
 
-2) Run talker node in terminal - 2
+2) Run call rosservice *my_service* in terminal - 2
     ```bash
     cd ~/<your_ws>
     source devel/setup.bash
-    rosrun beginner_tutorials talker
+    rosservice call /my_service "input: 'new_string'" 
     ```
 
-3) Run talker node in terminal - 3
+3) Run rqt_console in terminal - 3
     ```bash
     cd ~/<your_ws>
     source devel/setup.bash
-    rosrun beginner_tutorials listener
+    rosrun rqt_console rqt_console 
     ```
 
+4) Run rqt_logger_level in terminal - 4
+    ```bash
+    cd ~/<your_ws>
+    source devel/setup.bash
+    rosrun rqt_logger_level rqt_logger_level 
+    ```
+
+    Screenshot of rqt_console and rqt_logger_levels
+    ![](/results/ros_logger_image.png)
 
 ## Run cpplint and cppcheck
 To run Cpplint:
@@ -45,7 +54,7 @@ To run Cpplint:
 
 To run Cppcheck:
   ```bash
-  cppcheck --enable=all --std=c++11 -I src/ --suppress=missingIncludeSystem $( find . -name *.cpp ) > results/cppcheck_result.txt
+  cppcheck --language=c++ --std=c++11 -I include --suppress=missingIncludeSystem  $( find . -name \*.hpp -or -name \*.cpp) > results/cppcheck_result.txt
   ```
 
 ## License
