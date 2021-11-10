@@ -33,8 +33,9 @@
 
 #include <ros/ros.h>
 #include <std_msgs/String.h>
+#include <tf/transform_broadcaster.h>
+#include <beginner_tutorials/my_service.h>
 #include <sstream>
-#include "beginner_tutorials/my_service.h"
 
 int default_freq = 5;
 extern std::string base_string = "initial string";
@@ -122,12 +123,19 @@ int main(int argc, char **argv) {
   }
 
   ros::Rate loop_rate(talker_freq);
+  // TransformBroadcaster object that is uded to send the transformations
+  tf::TransformBroadcaster br;
+  // Create a Transform object, and copy the information from the 2D pose into the 3D transform
+  tf::Transform transform;
+  tf::Quaternion q;
 
   /**
    * A count of how many messages we have sent. This is used to create
    * a unique string for each message.
    */
   int count = 0;
+  float x = 2, y = 0 , z = 0, yaw = 1.57;
+
   while (ros::ok()) {
     /**
      * This is a message object. You stuff it with data, and then publish it.
@@ -147,6 +155,12 @@ int main(int argc, char **argv) {
      * in the constructor above.
      */
     chatter_pub.publish(msg);
+
+    transform.setOrigin(tf::Vector3(x, y, z));
+    q.setRPY(0, 0, yaw);
+    transform.setRotation(q);
+    br.sendTransform(tf::StampedTransform(transform, ros::Time::now()
+    , "world", "talk"));
 
     ros::spinOnce();
 
