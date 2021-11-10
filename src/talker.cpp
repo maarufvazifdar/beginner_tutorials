@@ -24,7 +24,8 @@
  * @file talker.cpp
  * @author Maaruf Vazifdar
  * @brief This file demonstrates simple sending of messages over the ROS
- * system and also starts a service to return a string message.
+ *        system, starts a service to return a string message and broadcasts 
+ *        tf frames.
  * @version 1.2
  * @date 11/07/2021
  * @copyright  Copyright (c) 2021
