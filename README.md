@@ -18,6 +18,7 @@ The ROS assignment demonstrates the working of a simple publisher subscriber and
 
     - Change **talker_frequency** argument to change talker frequency (in Hz).
     - To record rosbag file give argument **record_rosbag** as true.
+    
     ```bash
     cd ~/<your_ws>/src
     git clone https://github.com/maarufvazifdar/beginner_tutorials.git

@@ -1,4 +1,0 @@
-Done processing ./src/listener.cpp
-Done processing ./src/talker.cpp
-Done processing ./test/talker_test.cpp
-Total errors found: 2
