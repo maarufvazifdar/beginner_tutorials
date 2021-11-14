@@ -4,47 +4,97 @@
 ### **Author:** *Maaruf Vazifdar*, maarufvazifdar@gmail.com
 
 ## Overview
-The ROS assignment demonstrates the working of a simple publisher subscriber and nodes communicating over the *chatter* topic and a starts a service to change the base_string in talker.
+The ROS assignment demonstrates the working of a simple publisher subscriber and nodes communicating over the *chatter* topic, starts a service *my_service* to change the base_string in talker, broadcasts tf frames, and tests to check the status of *my_service* and its response.
 
-- **Talker** node continuously publishes a string message on the *chatter* topic at a rate (in Hz) according to the argument given when launching.
+- **Talker** node continuously publishes a string message on the *chatter* topic at a rate (in Hz) according to the argument given, gives roslog messages of all 5 verbosity levels and broadcasts tf frames *talk* and *world*.
 - **Listener** node subscribes to the *chatter* topic and prints the ROS_INFO message on the terminal.
 
 ## Dependencies
 - ROS - Melodic
 
+
 ## Building and Running
-1) Build the package and launch talker and listener nodes:
+1) Build the package and launch talker and listener nodes: 
+
+    - Change **talker_frequency** argument to change talker frequency (in Hz).
+    - To record rosbag file give argument **record_rosbag** as true.
     ```bash
     cd ~/<your_ws>/src
     git clone https://github.com/maarufvazifdar/beginner_tutorials.git
     cd ~/<your_ws>
     catkin_make
-    roslaunch beginner_tutorials beginner_tutorials.launch talker_frequency:=20
+
+    roslaunch beginner_tutorials beginner_tutorials.launch talker_frequency:=10 record_rosbag:=false    
     ```
 
-2) Run call rosservice *my_service* in terminal - 2
+2) Run call rosservice *my_service*: (in new terminal)
     ```bash
     cd ~/<your_ws>
     source devel/setup.bash
     rosservice call /my_service "input: 'new_string'" 
     ```
 
-3) Run rqt_console in terminal - 3
+3) Inspecting TF data:
+    ```bash
+    cd ~/<your_ws>
+    source devel/setup.bash
+    rosrun rqt_tf_tree rqt_tf_tree
+    ```
+    ```bash
+    cd ~/<your_ws>
+    source devel/setup.bash
+    rosrun tf tf_echo world talk 
+    ```
+
+4) Inspect ros bag file:
+    ```bash
+    cd ~/<your_ws>
+    source devel/setup.bash
+    rosbag info src/beginner_tutorials/results/my_bagfile.bag 
+    ```
+    Playing *my_bagfile.bag* ros bag file:
+    ```bash
+    cd ~/<your_ws>
+    source devel/setup.bash
+    rosbag play -l src/beginner_tutorials/results/my_bagfile.bag 
+    ```
+    Verify listener is workig: (in new terminal)
+    ```bash
+    cd ~/<your_ws>
+    source devel/setup.bash
+    rosrun beginner_tutorials listener 
+    ```
+
+5) Run listener node: (in new terminal)
+    ```bash
+    cd ~/<your_ws>
+    source devel/setup.bash
+    rosrun beginner_tutorials listener  
+    ```
+
+6) Run rqt_console: (in new terminal)
     ```bash
     cd ~/<your_ws>
     source devel/setup.bash
     rosrun rqt_console rqt_console 
     ```
 
-4) Run rqt_logger_level in terminal - 4
+7) Run rqt_logger_level: (in new terminal)
     ```bash
     cd ~/<your_ws>
     source devel/setup.bash
     rosrun rqt_logger_level rqt_logger_level 
     ```
-
     Screenshot of rqt_console and rqt_logger_levels
     ![](/results/ros_logger_image.png)
+
+## Building and Running ROSTests
+
+```bash
+cd ~/<your_ws>
+catkin_make
+catkin_make run_tests_beginner_tutorials
+```
 
 ## Run cpplint and cppcheck
 To run Cpplint:

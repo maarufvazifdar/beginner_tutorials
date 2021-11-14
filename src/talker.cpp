@@ -126,7 +126,8 @@ int main(int argc, char **argv) {
   ros::Rate loop_rate(talker_freq);
   // TransformBroadcaster object that is uded to send the transformations
   tf::TransformBroadcaster br;
-  // Create a Transform object, and copy the information from the 2D pose into the 3D transform
+  // Create a Transform object, and copy the information from the 2D pose
+  // into the 3D transform
   tf::Transform transform;
   tf::Quaternion q;
 
